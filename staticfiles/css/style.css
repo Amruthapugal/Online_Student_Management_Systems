@@ -1,0 +1,943 @@
+/* ================= GLOBAL ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3a8a, #6366f1);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+    color: #1f2937;
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard-container {
+    width: 100%;
+    max-width: 1150px;
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-container h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 35px;
+    color: #111827;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* ================= SEARCH ================= */
+.search-form {
+    display: flex;
+    gap: 12px;
+}
+
+.search-form input {
+    padding: 12px 16px;
+    width: 280px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* ================= BUTTONS ================= */
+.btn {
+    padding: 11px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+/* Add Button */
+.btn.add {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+.btn.add:hover {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+}
+
+/* Logout Button */
+.btn.logout {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.btn.logout:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+/* Search Button */
+.btn.search {
+    background: linear-gradient(135deg, #06b6d4, #2563eb);
+}
+
+.btn.search:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ================= TABLE ================= */
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.student-table thead {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #ffffff;
+}
+
+.student-table th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.student-table th.action-header {
+    text-align: center;
+    background: linear-gradient(135deg, #9333ea, #6b21a8);
+}
+
+.student-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.student-table tbody tr:hover {
+    background-color: #f3f4ff;
+    transition: 0.3s ease;
+}
+
+/* ================= ACTION COLUMN ================= */
+.action-col {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.action-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    transition: 0.3s ease;
+}
+
+/* Edit Button */
+.edit-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Delete Button */
+.delete-btn {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* ================= EMPTY STATE ================= */
+.empty {
+    text-align: center;
+    padding: 20px;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+/* ================= FORM ================= */
+.form-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background: #ffffff;
+    padding: 45px 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.student-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+/* ================= LOGIN PAGE ================= */
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+}
+
+.login-container {
+    width: 380px;
+    background: #ffffff;
+    padding: 40px 35px;
+    border-radius: 18px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.login-container h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.login-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+/* Floating Input */
+.input-group {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 12px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.input-group label {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    font-size: 14px;
+    color: #9ca3af;
+    pointer-events: none;
+    transition: 0.3s ease;
+    background: #ffffff;
+    padding: 0 4px;
+}
+
+.input-group input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -8px;
+    left: 10px;
+    font-size: 12px;
+    color: #6366f1;
+}
+
+/* Login Button */
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+}
+
+/* Links */
+.login-links {
+    margin-top: 18px;
+}
+
+.login-links a {
+    font-size: 14px;
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .search-form input {
+        width: 100%;
+    }
+
+    .student-table th,
+    .student-table td {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    .dashboard-container h2 {
+        font-size: 24px;
+    }
+}
+
+/* ================= USER DASHBOARD ================= */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.dashboard-header h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* Search Alignment */
+.user-search {
+    margin-bottom: 25px;
+}
+
+/* Table Slightly Different Tone */
+.user-table thead {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.user-table tbody tr:hover {
+    background: #e0f2fe;
+}
+
+/* View Only Badge */
+.view-only {
+    text-align: center;
+    font-weight: 600;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+/* ================= ADMIN LOGIN ================= */
+
+.admin-bg {
+    background: linear-gradient(135deg, #1e3a8a, #6d28d9);
+}
+
+.admin-login-container {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 45px 40px;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+}
+
+.admin-login-container h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.admin-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    margin-bottom: 18px;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #6d28d9;
+    box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.2);
+}
+
+/* Admin Login Button */
+.admin-login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #6d28d9, #4c1d95);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.admin-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(76, 29, 149, 0.4);
+}
+
+/* Switch Section */
+.switch-section {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.switch-section a {
+    color: #6d28d9;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.switch-section a:hover {
+    text-decoration: underline;
+}
+
+/* ================= UPDATE STUDENT PAGE ================= */
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.update-card {
+    width: 480px;
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+    animation: fadeIn 0.5s ease;
+}
+
+.update-card h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1e293b;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+/* Form layout */
+.update-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #374151;
+}
+
+.form-row input {
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.form-row input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* Update Button */
+.update-btn {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.update-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+}
+
+/* Back Link */
+.back-link {
+    margin-top: 18px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-weight: 600;
+    color: #6d28d9;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.alert.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ================= BASE LAYOUT ================= */
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-wrapper {
+    width: 100%;
+}
+
+/* ================= MESSAGE ALERTS ================= */
+
+.message-container {
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+.alert {
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    animation: fadeIn 0.4s ease;
+}
+
+.alert.success {
+    background: #dcfce7;
+    color: #166534;
+    border-left: 5px solid #22c55e;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 5px solid #ef4444;
+}
+
+/* ===== Attendance Page ===== */
+.student-info {
+    background: #f3f4f6;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.attendance-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn.present {
+    background: linear-gradient(135deg, #22c55e, #15803d);
+}
+
+.btn.absent {
+    background: linear-gradient(135deg, #ef4444, #991b1b);
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ===== Charts Page ===== */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.chart-card h3 {
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+.big-number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #2c3e99, #5a67d8);
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;   /* CENTER HORIZONTALLY */
+    align-items: center;       /* CENTER VERTICALLY */
+}
+
+.main-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    transition: 0.3s;
+}
+
+/* Add Student */
+.btn.add {
+    background: #6c63ff;
+}
+
+/* Charts */
+.btn.charts {
+    background: #00b894;
+}
+
+/* PDF */
+.btn.pdf {
+    background: #fd7e14;
+}
+
+/* Logout */
+.btn.logout {
+    background: #e63946;
+}
+
+/* Attendance Button */
+.action-btn.attendance-btn {
+    background: #ffb703;
+    color: black;
+}
+
+/* ================= ATTENDANCE PAGE ================= */
+
+.attendance-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.attendance-card {
+    background: white;
+    width: 500px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 30px;
+    font-size: 26px;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #6c63ff, #4e73df);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.present-btn {
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.present-btn:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+.absent-btn {
+    background: #dc3545;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.absent-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    display: inline-block;
+    margin-top: 25px;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+}
+
+.cancel-btn:hover {
+    color: #000;
+}
+
+/* ===== Percentage Section ===== */
+
+.percentage-section {
+    margin: 25px 0;
+}
+
+.progress-bar {
+    background: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    transition: width 0.5s ease-in-out;
+}
+
+.summary {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ===== Attendance History ===== */
+
+.history-section {
+    margin-top: 30px;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.attendance-table th {
+    background: #4e73df;
+    color: white;
+    padding: 8px;
+}
+
+.attendance-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.status-present {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-absent {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status.present {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.absent {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status.not-marked {
+    background-color: #fff3cd;
+    color: #856404;
+}
