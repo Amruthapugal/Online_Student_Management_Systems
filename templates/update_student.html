@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Update Student{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+
+    <div class="update-card">
+
+        <h2>Update Student</h2>
+        <p class="subtitle">Modify student information below</p>
+
+        <form method="post" class="update-form">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <label>Name</label>
+                <input type="text" name="name" value="{{ student.name }}" required>
+            </div>
+
+            <div class="form-row">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ student.email }}" required>
+            </div>
+
+            <div class="form-row">
+                <label>Department</label>
+                <input type="text" name="department" value="{{ student.department }}" required>
+            </div>
+
+            <div class="form-row">
+                <label>Year</label>
+                <input type="number" name="year" value="{{ student.year }}" required>
+            </div>
+
+            <button type="submit" class="update-btn">
+                💾 Update Student
+            </button>
+
+            <a href="{% url 'students:admin_dashboard' %}" class="back-link">
+                ← Back to Dashboard
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}

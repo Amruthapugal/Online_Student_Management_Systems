@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<h2>Student List</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Year</th>
+    </tr>
+    {% for s in students %}
+    <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.department }}</td>
+        <td>{{ s.year }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'dashboard' %}">⬅ Back to Dashboard</a>
+{% endblock %}

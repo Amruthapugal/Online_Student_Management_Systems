@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+
+    <h2 class="page-title">📊 Student Analytics Dashboard</h2>
+
+    <!-- Summary -->
+    <div class="summary-card">
+        <h3>Total Students</h3>
+        <p class="big-number">{{ total_students }}</p>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-wrapper">
+        <div class="chart-box">
+            <h3>Students by Department</h3>
+            <canvas id="departmentChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h3>Students by Year</h3>
+            <canvas id="yearChart"></canvas>
+        </div>
+    </div>
+
+    <div class="back-btn-wrapper">
+        <a href="{% url 'students:admin_dashboard' %}" class="btn add">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+<!-- Safely pass Django data to JS -->
+{{ department_data|json_script:"department-data" }}
+{{ year_data|json_script:"year-data" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const departmentData = JSON.parse(
+        document.getElementById("department-data").textContent
+    );
+
+    const yearData = JSON.parse(
+        document.getElementById("year-data").textContent
+    );
+
+    const departmentLabels = departmentData.map(d => d.department);
+    const departmentCounts = departmentData.map(d => d.count);
+
+    const yearLabels = yearData.map(d => "Year " + d.year);
+    const yearCounts = yearData.map(d => d.count);
+
+    new Chart(document.getElementById("departmentChart"), {
+        type: "bar",
+        data: {
+            labels: departmentLabels,
+            datasets: [{
+                label: "Students",
+                data: departmentCounts,
+                backgroundColor: "#4CAF50"
+            }]
+        },
+        options: { responsive: true }
+    });
+
+    new Chart(document.getElementById("yearChart"), {
+        type: "pie",
+        data: {
+            labels: yearLabels,
+            datasets: [{
+                data: yearCounts,
+                backgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56",
+                    "#4BC0C0",
+                    "#9966FF"
+                ]
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
+
+<style>
+.page-title { text-align:center; margin-bottom:30px; }
+
+.summary-card {
+    text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    margin-bottom:30px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.big-number {
+    font-size:40px;
+    font-weight:bold;
+    color:#4CAF50;
+}
+
+.charts-wrapper {
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.chart-box {
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:450px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.back-btn-wrapper {
+    text-align:center;
+    margin-top:40px;
+}
+</style>
+
+{% endblock %}

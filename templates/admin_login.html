@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper admin-bg">
+
+    <div class="admin-login-container">
+
+        <h2>Admin Panel</h2>
+        <p class="admin-subtitle">Authorized Access Only</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-msg">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="login-form">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Admin Username" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="admin-login-btn">
+                🔐 Login as Admin
+            </button>
+        </form>
+
+        <div class="switch-section">
+            <span>Not an admin?</span>
+            <a href="{% url 'accounts:user_login' %}">
+                User Login
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

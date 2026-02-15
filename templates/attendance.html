@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Mark Attendance{% endblock %}
+
+{% block content %}
+<div class="attendance-container">
+
+    <div class="attendance-card">
+
+        <h2 class="title">📌 Mark Attendance</h2>
+
+        <div class="student-info">
+            <div class="avatar">
+                {{ student.name|first }}
+            </div>
+            <div>
+                <h3>{{ student.name }}</h3>
+                <p>{{ student.department }} | Year {{ student.year }}</p>
+            </div>
+        </div>
+
+        <!-- Attendance Percentage -->
+        <div class="percentage-section">
+            <h4>Attendance Percentage</h4>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ percentage }}%;">
+                    {{ percentage }}%
+                </div>
+            </div>
+            <p class="summary">
+                Present: {{ present_count }} / {{ total_classes }}
+            </p>
+        </div>
+
+        <!-- Mark Buttons -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="status-buttons">
+                <button type="submit" name="status" value="Present" class="present-btn">
+                    ✅ Present
+                </button>
+                <button type="submit" name="status" value="Absent" class="absent-btn">
+                    ❌ Absent
+                </button>
+            </div>
+        </form>
+
+        <!-- Attendance History -->
+        <div class="history-section">
+            <h4>Attendance History</h4>
+
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for record in attendance_records %}
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>
+                            {% if record.status == "Present" %}
+                                <span class="status-present">Present</span>
+                            {% else %}
+                                <span class="status-absent">Absent</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">No attendance records yet.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="back-btn">
+            <a href="{% url 'students:admin_dashboard' %}" class="cancel-btn">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
